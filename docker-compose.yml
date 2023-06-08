@@ -1,0 +1,27 @@
+version: '3'
+services:
+  nginx:
+    image: gulraizgulshan/social-app-nginx
+    ports:
+      - "80:80"
+    depends_on:
+      - api
+      - client
+    networks:
+      - ABC  
+  api:
+      image: gulraizgulshan/social-app-backend
+      environment:
+        - MONGODB_URL=mongodb+srv://alizaalwani:123@cluster0.ah9h8he.mongodb.net/?retryWrites=true&w=majority
+        - JWT_SECRET=SHI
+        - PORT=5000
+      networks:
+        - ABC  
+
+  client:
+    image: gulraizgulshan/social-app-frontend
+    networks:
+      - ABC
+
+networks:
+  ABC:
